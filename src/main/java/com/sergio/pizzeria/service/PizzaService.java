@@ -19,6 +19,14 @@ public class PizzaService {
 		return this.pizzaRespository.findAll();
 	}
 
+	public List<PizzaEntity> getAvailablePizzas() {
+		return this.pizzaRespository.findByAvailableTrueOrderByPrice();
+	}
+
+	public PizzaEntity getByName(String name) {
+		return this.pizzaRespository.findAllByAvailableTrueAndNameIgnoreCase(name);
+	}
+
 	public PizzaEntity get(int idPizza) {
 		return this.pizzaRespository.findById(idPizza).orElse(null);
 	}
