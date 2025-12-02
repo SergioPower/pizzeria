@@ -7,6 +7,7 @@ import com.sergio.pizzeria.persistence.repository.PizzaRespository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -26,9 +27,12 @@ public class PizzaService {
 		return this.pizzaPagSortRepository.findAll(pageReguest);
 	}
 
-	public List<PizzaEntity> getAvailablePizzas() {
+	public Page<PizzaEntity> getAvailablePizzas(int page, int elements, String sortBy, String sortDirection) {
 		System.out.println(this.pizzaRespository.countByVeganTrue());
-		return this.pizzaRespository.findByAvailableTrueOrderByPrice();
+
+		Sort sort = Sort.by(Sort.Direction.fromString(sortDirection), sortBy);
+		Pageable pageReguest = PageRequest.of(page, elements, sort);
+		return this.pizzaPagSortRepository.findByAvailableTrue(pageReguest);
 	}
 
 	public PizzaEntity getByName(String name) {
