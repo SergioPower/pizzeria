@@ -1,8 +1,12 @@
 package com.sergio.pizzeria.service;
 
 import com.sergio.pizzeria.persistence.entity.PizzaEntity;
+import com.sergio.pizzeria.persistence.repository.PizzaPagSortRepository;
 import com.sergio.pizzeria.persistence.repository.PizzaRespository;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -10,13 +14,16 @@ import java.util.List;
 @Service
 public class PizzaService {
 	private final PizzaRespository pizzaRespository;
+	private final PizzaPagSortRepository pizzaPagSortRepository;
 
-	public PizzaService(PizzaRespository pizzaRespository) {
+	public PizzaService(PizzaRespository pizzaRespository, PizzaPagSortRepository pizzaPagSortRepository) {
 		this.pizzaRespository = pizzaRespository;
+		this.pizzaPagSortRepository = pizzaPagSortRepository;
 	}
 
-	public List<PizzaEntity> getAll() {
-		return this.pizzaRespository.findAll();
+	public Page<PizzaEntity> getAll(int page, int elements) {
+		Pageable pageReguest = PageRequest.of(page, elements);
+		return this.pizzaPagSortRepository.findAll(pageReguest);
 	}
 
 	public List<PizzaEntity> getAvailablePizzas() {
