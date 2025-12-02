@@ -24,4 +24,9 @@ public class OrderController {
 		return ResponseEntity.ok(this.orderService.getAll());
 	}
 
+	@GetMapping("/today")
+	public ResponseEntity<List<OrderEntity>> getTodayOrderResponseEntity() {
+		return ResponseEntity.ok(this.orderService.getTodayOrders());
+	}
+
 }
