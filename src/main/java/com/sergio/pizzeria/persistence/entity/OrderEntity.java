@@ -8,8 +8,6 @@ import lombok.Setter;
 import java.time.LocalDateTime;
 import java.util.List;
 
-import org.springframework.core.annotation.Order;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity

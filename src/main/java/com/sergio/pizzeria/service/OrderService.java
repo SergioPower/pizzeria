@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.sergio.pizzeria.persistence.entity.OrderEntity;
 import com.sergio.pizzeria.persistence.repository.OrderRepository;
+import com.sergio.pizzeria.persistence.repository.projection.OrderSummary;
 
 @Service
 public class OrderService {
@@ -40,6 +41,10 @@ public class OrderService {
 
 	public List<OrderEntity> getCustomerOrders(String idCustomer) {
 		return this.orderRepository.findCustomerOrders(idCustomer);
+	}
+
+	public OrderSummary getSummary(int orderId) {
+		return this.orderRepository.findSummary(orderId);
 	}
 
 }
