@@ -1,4 +1,4 @@
-package com.sergio.pizzeria.persistence.entity;
+package com.sergio.pizzeria.persistence.audit;
 
 import java.time.LocalDateTime;
 
