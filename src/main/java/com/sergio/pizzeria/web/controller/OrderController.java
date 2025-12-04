@@ -11,6 +11,10 @@ import org.springframework.web.bind.annotation.RestController;
 import com.sergio.pizzeria.persistence.entity.OrderEntity;
 import com.sergio.pizzeria.persistence.repository.projection.OrderSummary;
 import com.sergio.pizzeria.service.OrderService;
+import com.sergio.pizzeria.service.dto.RandomOrderDto;
+
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 @RestController
 @RequestMapping("/api/orders")
@@ -44,6 +48,11 @@ public class OrderController {
 	@GetMapping("/summary/{id}")
 	public ResponseEntity<OrderSummary> getSummary(@PathVariable int id) {
 		return ResponseEntity.ok(this.orderService.getSummary(id));
+	}
+
+	@PostMapping("/random")
+	public ResponseEntity<Boolean> randomOrder(@RequestBody RandomOrderDto dto) {
+		return ResponseEntity.ok(this.orderService.saveRandomOrder(dto));
 	}
 
 }
